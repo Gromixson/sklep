@@ -1,0 +1,41 @@
+<h2>Koszyk</h2>
+
+<div class="row">
+
+  <div class="col-xs-12 ex-card">
+  <div ng-if="main.cart.length == 0">
+    <p class="ex-card__empty">Twoja koszyk jest pusty!</p>
+  </div>
+  <div class="shop__list" ng-repeat="item in main.cart">
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Produkt</th>
+          <th>Nazwa</th>
+          <th>Ilośc</th>
+          <th>Cena</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img class="shop__list__product--center img-responsive" ng-src="assets/images/{{ item.Image }}" alt="{{ item.Name }}"></td>
+          <td>{{ item.Name }}</td>
+          <td>
+            <button class="btn" ng-click="main.minus(item)" type="button" name="button">-</button>
+            {{ item.Amount }}
+            <button class="btn" ng-click="main.plus(item)" type="button" name="button">+</button>
+          </td>
+          <td>{{ item.Price }} zł</td>
+          <td><button class="btn" ng-Click="main.remove(item)" type="button" name="button">X</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  </div>
+    <p  ng-if="main.cart.length !== 0" class="shop__sum pull-right">Suma: {{ main.getTotal() }} zł</p>
+  </div>
+  <a type="button" class="btn pull-right orderbtn" name="button" ng-click="main.order()">Zamów</a>
+</div>

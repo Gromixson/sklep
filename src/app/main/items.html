@@ -1,0 +1,18 @@
+
+  <h2>Lista produktów</h2>
+  <select class="" ng-model="sortBy">
+      <option value="" disabled selected>Sortuj</option>
+      <option value="Name">Nazwa</option>
+      <option value="Price">Cena</option>
+
+  </select>
+  <section>
+    <div class="row">
+      <div class="col-sm-6 col-md-3 shop__product" ng-repeat="product in main.items | orderBy:sortBy">
+        <img class="shop__product--center img-responsive" ng-src="assets/images/{{ product.Image }}" alt="{{ product.title }}">
+        <h5>{{ product.Name}}</h5>
+        <p>Cena: {{ product.Price }} zł</p>
+        <button class="btn" type="button" name="button" ng-click="main.addToCart(product)">Dodaj do koszyka</button>
+      </div>
+    </div>
+  </section>

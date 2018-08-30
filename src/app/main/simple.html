@@ -1,0 +1,48 @@
+<a class="home-button" ui-sref="home" class="btn">Powrót do strony głownej</a>
+<div class="container shop">
+
+  <h2>Koszyk</h2>
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-6">
+      <button class="btn" type="button" name="button" ng-click="cartList = !cartList">
+      <span ng-if="!cartList">Rozwiń koszyk</span>
+      <span ng-if="cartList">Ukryj koszyk</span>
+    </button>
+    <div ng-if="main.cart.length == 0 && cartList">
+      <p>Twoja karta jest pusta!</p>
+    </div>
+      <div class="shop__list" ng-if="cartList" ng-repeat="item in main.cart">
+        <li>
+          <img class="shop__list__product--center img-responsive" ng-src="assets/images/{{ item.Image }}" alt="{{ item.Name }}">
+          {{ item.Name }}
+          <button class="btn" ng-click="main.minus(item)" type="button" name="button">-</button>
+          {{ item.Amount }}
+          <button class="btn" ng-click="main.plus(item)" type="button" name="button">+</button>
+          {{ item.Price }} zł
+          <button class="btn" ng-Click="main.remove(item)" type="button" name="button">X</button>
+        </li>
+      </div>
+      <p class="shop__sum pull-right">Suma: {{ main.getTotal() }} zł</p>
+    </div>
+  </div>
+
+  <h2>Lista produktów</h2>
+  <select class="" ng-model="sortBy">
+      <option value="" disabled selected>Sortuj</option>
+      <option value="Name">Nazwa</option>
+      <option value="Price">Cena</option>
+
+  </select>
+  <section>
+    <div class="row">
+      <div class="col-sm-6 col-md-3 shop__product" ng-repeat="product in main.items | orderBy:sortBy">
+        <img class="shop__product--center img-responsive" ng-src="assets/images/{{ product.Image }}" alt="{{ product.title }}">
+        <h5>{{ product.Name}}</h5>
+        <p>Cena: {{ product.Price }} zł</p>
+        <button class="btn" type="button" name="button" ng-click="main.addToCart(product)">Dodaj do koszyka</button>
+      </div>
+    </div>
+  </section>
+
+</div>
